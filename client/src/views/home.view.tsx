@@ -2,9 +2,11 @@ import React, { memo } from 'react'
 
 const Home = () => {
     return (
-        <div>
-            Home
-        </div>
+        <section className='h-screen w-full'>
+            <div className='container'>
+                home
+            </div>
+        </section>
     )
 }
 

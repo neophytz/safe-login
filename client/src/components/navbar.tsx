@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const Header = () => {
   return (
-    <div className='px-10 py-5 z-10 flex flex-row align-middle justify-between'>
+    <div className='px-10 py-5 z-10 absolute top-0 w-full flex flex-row align-middle justify-between'>
       <div className='text-lg text-gray-900 font-semibold'>
         <Link to="/">
           <span className='px-6 cursor-pointer'>Logxtr</span>
