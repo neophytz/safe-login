@@ -53,6 +53,7 @@ export class BaseController<T> {
     public async create(res: Response, document: Document<T>){
         try {
             const createdDoc = await this.model.create(document);
+            logger.debug(createdDoc);
             return res.status(StatusCodes.CREATED).json(http_formatter(createdDoc))
         } catch (error) {
             this.errorHandler(res, error)

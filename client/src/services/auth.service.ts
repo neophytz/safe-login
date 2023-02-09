@@ -14,9 +14,9 @@ type LoginResponse = {
 }
 
 export const signup = async (data: ISignup): Promise<AxiosResponse<SignupResponse>> => { 
-    return await http.post('/signup', data);
+    return await http.post('/auth/signup', data);
 }
 
 export const login = async (data: ILogin): Promise<AxiosResponse<LoginResponse>> => {
-    return await http.post('/login', data);
+    return await http.post('/auth/login', data);
 }

@@ -1,6 +1,6 @@
 import { Router } from "express";
+import { loginRouter } from "../app/login/login.routes";
 
 export const allRoutes: Record<string, Router> = {
-    // 'student' : studentRouter,
-    // 'post': postRouter
+    'auth': loginRouter
 }

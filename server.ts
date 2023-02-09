@@ -1,7 +1,7 @@
 import { App } from "./src/app";
 import { logger } from "./src/common/logger";
 import { __middleware } from "./src/middleware";
-import { allRoutes } from "./src/routes";
+import { allRoutes } from "./src/common/routes";
 
 const dotenv = require('dotenv');
 dotenv.config()

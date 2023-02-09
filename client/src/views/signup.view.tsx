@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import React, { memo, useRef } from 'react'
 import { toast } from 'react-hot-toast';
 import { useMutation } from 'react-query';
@@ -15,8 +16,9 @@ const Signup = () => {
                 toast.error(res.data.message)
             }
         },
-        onError: () => {
-            toast.error("Signup failed, please retry after sometime.")
+        onError: (e: AxiosError) => {
+            const _error: any = e.response?.data;
+            toast.error(_error.message || "Signup failed, please retry after sometime.")
         }
     });
 
@@ -37,19 +39,20 @@ const Signup = () => {
             confirmPassword: confirmPasswordRef.current?.value
         }
 
+        let valid= true;
         Object.keys(userData).forEach(el => {
-            if(!userData[el]) {
+            if(!userData[el] && el !== 'lastName') {
                 toast.error(`${el} is required`);
-                return;
+                valid = false
             }
         })
 
         if(userData.password !== userData.confirmPassword) {
             toast.error('Password and confirm password did not match, please check.');
-            return;
+            valid = false
         }
-        console.log('here?')
-        mutate(userData);
+
+        valid && mutate(userData);
     }
 
     return (
