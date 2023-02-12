@@ -6,7 +6,7 @@ import rateLimit from "express-rate-limit";
 import morgan from 'morgan';
 
 // const corsOptions: CorsOptions = {
-//     origin: 'localhost:3000',
+//     origin: 'abc.com',
 //     preflightContinue: true,
 //     credentials: true,
 // }

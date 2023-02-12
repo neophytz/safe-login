@@ -3,6 +3,9 @@ import { BaseController } from "../../common/base.controller"
 import { ILogin, Login } from "./login.schema"
 import * as bcrypt from 'bcrypt';
 import { StatusCodes } from "http-status-codes";
+import * as jwt from 'jsonwebtoken';
+import { AUTH_ERROR, http_formatter } from "../../util";
+import { logger } from "../../common/logger";
 
 class LoginController extends BaseController<ILogin>{
     /**
@@ -25,6 +28,29 @@ class LoginController extends BaseController<ILogin>{
             delete req.body.confirmPassword;
             next()
         });
+    }
+
+    public login = async (req: Request, res: Response) => {
+        const {userName, password} = req.body;
+        logger.info(userName)
+        logger.info(password)
+        try {
+            const user = await this.model.findOne({userName});
+            const match = await bcrypt.compare(password, user?.password as string)
+            if(!match || !user) {
+                return res.status(StatusCodes.UNAUTHORIZED).json(
+                    http_formatter(new Error(AUTH_ERROR), AUTH_ERROR, false)
+                );
+            }
+            const payload = {uid: user?._id};
+            const token = jwt.sign(payload, process.env.AUTH_SECRET as string, { expiresIn: 60 * 60 });
+            return res.status(StatusCodes.OK).json(
+                http_formatter({token})
+            );
+        } catch (error) {
+            logger.error(error)
+            return this.errorHandler(res, error, StatusCodes.INTERNAL_SERVER_ERROR)
+        }
     }
 }
 

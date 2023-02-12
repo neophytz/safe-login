@@ -10,6 +10,11 @@ export const Header = () => {
         </Link>
       </div>
       <div className='text-gray-700 hover:text-gray-900 transition duration-150'>
+        <Link to='/dashboard'>
+          <button className='px-10 p-2 text-gray-700  transition duration-150 ease-in-out' type='button'>
+            Dashboard
+          </button>
+        </Link>
         <Link to='/signup'>
           <button className='px-10 p-2 text-blue-700 rounded-full border border-blue-500 hover:border-blue-600 hover:text-white hover:bg-blue-500 transition duration-150 ease-in-out mx-4' type='button'>
             Signup

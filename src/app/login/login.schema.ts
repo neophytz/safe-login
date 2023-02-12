@@ -1,9 +1,9 @@
 import { Document, model, Schema } from 'mongoose';
 import {z} from 'zod';
-import { LoginValidator } from './login.validator';
+import { SignupValidator } from './login.validator';
 import * as bcrypt from 'bcrypt';
 
-type _Login = z.infer<typeof LoginValidator>
+type _Login = z.infer<typeof SignupValidator>
 
 export interface ILogin extends Document, _Login {}
 
@@ -34,7 +34,7 @@ const LoginSchema = new Schema<ILogin>({
     password: {
         type: String,
         required: true,
-        minlength: 4
+        minlength: 4,
     },
     isDeleted: {
         type: Boolean,

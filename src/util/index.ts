@@ -19,3 +19,5 @@ export const isEmail = (email: string):boolean =>  {
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return regex.test(email);
 };
+
+export const AUTH_ERROR = "UserName or password not matched, please retry.";

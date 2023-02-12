@@ -20,3 +20,11 @@ export const signup = async (data: ISignup): Promise<AxiosResponse<SignupRespons
 export const login = async (data: ILogin): Promise<AxiosResponse<LoginResponse>> => {
     return await http.post('/auth/login', data);
 }
+
+export const isAuthenticated = (): boolean => {
+    return true;
+}
+
+export const logout = (): void => {
+    
+}

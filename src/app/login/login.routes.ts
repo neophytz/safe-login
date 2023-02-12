@@ -1,10 +1,12 @@
 import { Request, Response, Router } from "express";
 import { _loginController } from "./login.controller";
-import { loginValidatorMiddlware } from "./login.validator";
+import { loginValidatorMiddleware, signupValidatorMiddlware } from "./login.validator";
 
 export const loginRouter = Router();
 
 loginRouter.post('/signup', 
-    loginValidatorMiddlware, 
+    signupValidatorMiddlware, 
     (req: Request, res: Response ) => _loginController.create(res, req.body)
 );
+
+loginRouter.post('/login', loginValidatorMiddleware, _loginController.login);

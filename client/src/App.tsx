@@ -6,7 +6,9 @@ import { Loading } from './components/Loading';
 
 import { queryClientConfig } from './util/constant';
 import { Toaster } from 'react-hot-toast';
-import { Home, Login, Signup } from './views';
+import { Dashboard, Home, Login, Signup } from './views';
+import { AuthGuard } from './components/AuthGuard';
+
 const queryClient = new QueryClient(queryClientConfig)
 
 function App() {
@@ -21,7 +23,7 @@ function App() {
               <Route path='/' element={<Home />} />
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
-
+              <Route path='/dashboard' element={<AuthGuard component={<Dashboard />} />} />
               {/* wild card route */}
               <Route path='*' element={<h2 className='text-center p-20 uppercase'>not found</h2>} />
             </Routes>

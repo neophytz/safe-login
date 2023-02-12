@@ -10,8 +10,8 @@ const Login = () => {
     const { mutate, isLoading } = useMutation(login, {
         onSuccess: res => {
             if(res.data.success) {
-                toast.success("Registeration successful, please login.")
-                navigate('/login');
+                toast.success("Welcome to the world of bright developer.", {className: 'p-3 bg-gray-800 text-white'})
+                navigate('/dashboard');
             } else {
                 toast.error(res.data.message)
             }
@@ -39,10 +39,6 @@ const Login = () => {
             }
         })
 
-        if(userData.password !== userData.confirmPassword) {
-            toast.error('Password and confirm password did not match, please check.');
-            return;
-        }
         mutate(userData);
     }
 
