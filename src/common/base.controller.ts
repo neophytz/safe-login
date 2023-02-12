@@ -18,7 +18,7 @@ export class BaseController<T> {
     }
     
     public errorHandler(res: Response, error: any, statusCode: StatusCodes = StatusCodes.BAD_REQUEST){
-        logger.error('[ERROR]', error);
+        logger.debug('[ERROR]', error);
         return res.status(statusCode).json(http_formatter(error, this.DEFAULT_ERROR_MSG, false));
     }
 
