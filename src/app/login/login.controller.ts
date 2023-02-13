@@ -32,8 +32,6 @@ class LoginController extends BaseController<ILogin>{
 
     public login = async (req: Request, res: Response) => {
         const {userName, password} = req.body;
-        logger.info(userName)
-        logger.info(password)
         try {
             const user = await this.model.findOne({userName});
             const match = await bcrypt.compare(password, user?.password as string)

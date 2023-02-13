@@ -20,4 +20,4 @@ export const isEmail = (email: string):boolean =>  {
     return regex.test(email);
 };
 
-export const AUTH_ERROR = "UserName or password not matched, please retry.";
+export const AUTH_ERROR = "Authetication failed, UserName or password not matched.";

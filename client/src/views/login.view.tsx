@@ -1,23 +1,28 @@
-import React, { memo, useRef } from 'react'
+import { AxiosError } from 'axios';
+import React, { memo, useLayoutEffect, useRef } from 'react'
 import { toast } from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Github, Google } from '../components/icons';
-import { login } from '../services/auth.service';
+import { isAuthenticated, login } from '../services/auth.service';
+import { setAuthToken } from '../services/storage.service';
 
 const Login = () => {
     const navigate = useNavigate();
     const { mutate, isLoading } = useMutation(login, {
         onSuccess: res => {
             if(res.data.success) {
+                const { token } = res.data.data;
                 toast.success("Welcome to the world of bright developer.", {className: 'p-3 bg-gray-800 text-white'})
                 navigate('/dashboard');
+                setAuthToken(token)
             } else {
                 toast.error(res.data.message)
             }
         },
-        onError: () => {
-            toast.error("Signup failed, please retry after sometime.")
+        onError: (err: AxiosError) => {
+            const data: any = err.response?.data;  
+            toast.error(data?.message || "Signup failed, please retry after sometime.")
         }
     });
 
@@ -42,6 +47,12 @@ const Login = () => {
         mutate(userData);
     }
 
+    useLayoutEffect(() => {
+        if(isAuthenticated()){
+            navigate('/dashboard')
+        }
+    }, [])
+    
     return (
         <section className='absolute top-0 left-0 z-1 pt-[100px] md:pt-[60px] h-screen w-screen'>
             <div className='grid md:grid-cols-3'>

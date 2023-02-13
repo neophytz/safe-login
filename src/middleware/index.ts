@@ -4,6 +4,7 @@ import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import rateLimit from "express-rate-limit";
 import morgan from 'morgan';
+import { handleInterceptor } from "../interceptor/handle.interceptor";
 
 // const corsOptions: CorsOptions = {
 //     origin: 'abc.com',
@@ -25,6 +26,8 @@ export const __middleware = [
     // cors(corsOptions),
     cors(), // cors("*")
     apiLimiter,
+    // custom interceptor.
+    handleInterceptor,
     (req: Request, res: Response, next: NextFunction) => {
       res.set('Cache-Control', 'no-store, max-age=0')
       next();
